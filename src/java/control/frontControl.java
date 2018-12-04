@@ -41,7 +41,7 @@ public class frontControl extends HttpServlet {
         } else {
             result = "FALSE";
         }
-        request.setAttribute("message", resuult);
+        request.setAttribute("message", result);
         //send to profile page
         request.getRequestDispatcher("minside.jsp").forward(request, response);
     }
