@@ -34,14 +34,14 @@ public class frontControl extends HttpServlet {
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
-        String success = "message";
+        String result = "message";
         User user = new User(role, firstName, lastName, email, phone, password);
         if (UserManager.createUser(user)) {
-            success = "TRUE";
+            result = "TRUE";
         } else {
-            success = "FALSE";
+            result = "FALSE";
         }
-        request.setAttribute("message", success);
+        request.setAttribute("message", resuult);
         //send to profile page
         request.getRequestDispatcher("minside.jsp").forward(request, response);
     }
