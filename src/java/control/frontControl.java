@@ -19,12 +19,11 @@ public class frontControl extends HttpServlet {
 
         switch (origin) {
             case "register":
-        {
             register(request, response);
-        }
-                break;
-            default:
-                throw new AssertionError();
+            break;
+            case "login":
+            login(request, response);
+            break;
         }
     }
 
@@ -45,5 +44,21 @@ public class frontControl extends HttpServlet {
         request.setAttribute("message", message);
         //send to profile page
         request.getRequestDispatcher("minside.jsp").forward(request, response);
+    }
+    
+    private void login (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        //String phone = request.getParameter("phone");
+        String password = request.getParameter("password");
+        //User user = new User(role, firstName, lastName, email, phone, password);
+        String message;
+        /*if (UserManager.createUser(user)) {
+            message = "Kære " + user.getFirstName() + ", tak for din registrering!";
+        } else {
+            message = "Vi beklager, din registrering har desværre ikke kunnet behandles.";
+        }
+        request.setAttribute("message", message);
+        //send to profile page
+        request.getRequestDispatcher("minside.jsp").forward(request, response);*/
     }
 }

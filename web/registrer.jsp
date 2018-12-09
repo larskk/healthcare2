@@ -15,9 +15,9 @@
         <h1>Opret dig som bruger</h1>
         <form action="frontControl" method="POST">
             Rolle:<br>
-            <input type="checkbox" name="role" value="user">Bruger
-            <input type="checkbox" name="role" value="therapist">Behandler
-            <input type="checkbox" name="role" value="administrator">Administrator<br>
+            <input type="checkbox" name="role" value="Bruger">Bruger
+            <input type="checkbox" name="role" value="Behandler">Behandler
+            <input type="checkbox" name="role" value="Administrator">Administrator<br>
             
             Fornavn:<br>
             <input type="text" name="firstName" value=""><br>

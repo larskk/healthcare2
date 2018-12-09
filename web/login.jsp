@@ -14,8 +14,10 @@
     <body>
         <h1>Login</h1>
         <form action="frontControl" method="POST">
-            Brugernavn: <input type="text" name="username" value="" /><br/>
-            Adgangskode: <input type="text" name="password" value="" /><br/>
+            Email eller telefonnummer<br>
+            <input type="text" name="username" value="" ><br>
+            Adgangskode:<br>
+            <input type="text" name="password" value="" ><br>
             <input type="hidden" name="origin" value="login"/>
             <input type="submit" name="submit" value="Login" />
         </form>
