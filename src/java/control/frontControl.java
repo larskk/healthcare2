@@ -13,14 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 public class frontControl extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //request.getRequestDispatcher("minside.jsp").forward(request, response);
         String origin = request.getParameter("origin");
 
         switch (origin) {
             case "register":
-                register(request, response);
+        {
+            register(request, response);
+        }
                 break;
             default:
                 throw new AssertionError();
@@ -34,14 +35,14 @@ public class frontControl extends HttpServlet {
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
-        String result = "message";
         User user = new User(role, firstName, lastName, email, phone, password);
+        String message;
         if (UserManager.createUser(user)) {
-            result = "TRUE";
+            message = "Kære " + user.getFirstName() + ", tak for din registrering!";
         } else {
-            result = "FALSE";
+            message = "Vi beklager, din registrering har desværre ikke kunnet behandles.";
         }
-        request.setAttribute("message", result);
+        request.setAttribute("message", message);
         //send to profile page
         request.getRequestDispatcher("minside.jsp").forward(request, response);
     }

@@ -13,7 +13,6 @@
     </head>
     <body>
         <%@page import="entity.User" %>
-        <h1>Bestil behandling</h1>
         <% String message = (String)request.getAttribute("message"); %>
          <h2><%= message %></h2>
     </body>
