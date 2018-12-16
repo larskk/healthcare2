@@ -14,24 +14,24 @@
     <body>
         <h1>Opret dig som bruger</h1>
         <form action="frontControl" method="POST">
-            Rolle:<br>
-            <input type="checkbox" name="role" value="Bruger">Bruger
-            <input type="checkbox" name="role" value="Behandler">Behandler
-            <input type="checkbox" name="role" value="Administrator">Administrator<br>
             
             Fornavn:<br>
-            <input type="text" name="firstName" value=""><br>
+            <input type="text" name="firstName" autofocus required><br>
             Efternavn<br>
-            <input type="text" name="lastName" value=""><br>
+            <input type="text" name="lastName" required><br>
             Telefonnummer:<br>
-            <input type="text" name="phone" value=""><br>
+            <input type="text" name="phone"><br>
             Email:<br>
-            <input type="text" name="email" value=""><br>
+            <input type="text" name="email" required><br>
             Adgangskode:<br>
-            <input type="password" name="password" value=""><br>
+            <input type="password" name="password" required><br>
+            Rolle:<br>
+            <input type="radio" name="role" value="1" checked>Bruger
+            <input type="radio" name="role" value="2">Behandler
+            <input type="radio" name="role" value="3">Administrator<br>
 
-            <input type="hidden" name="origin" value="register"><br>
-            <input type="submit" name="submit" value="Send">
+            <input type="hidden" name="origin" value=register><br>
+            <input type="submit" name="submit" value="Registrer">
         </form>
     </body>
 </html>

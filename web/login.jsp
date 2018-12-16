@@ -1,9 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : 01-12-2018, 19:54:20
-    Author     : LarsKramer
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,13 +7,19 @@
     </head>
     <body>
         <h1>Login</h1>
+        
+        <% String message = (String)request.getAttribute("message");
+        if (message!=null) { %>
+         <h2 style="color:red"><%= message %></h2>
+         <% } %>
         <form action="frontControl" method="POST">
-            Email eller telefonnummer<br>
-            <input type="text" name="username" value="" ><br>
+            Email:<br>
+            <input type="email" name="email"><br>
             Adgangskode:<br>
-            <input type="text" name="password" value="" ><br>
-            <input type="hidden" name="origin" value="login"/>
-            <input type="submit" name="submit" value="Login" />
+            <input type="password" name="pwd" required><br>
+            
+            <input type="hidden" name="origin" value="login">
+            <input type="submit" name="submit" value="Login">
         </form>
     </body>
 </html>

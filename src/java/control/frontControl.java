@@ -1,6 +1,7 @@
 package control;
 
-import data.UserManager;
+import data.TreatmentManager;
+import data.*;
 import entity.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -19,25 +20,30 @@ public class frontControl extends HttpServlet {
 
         switch (origin) {
             case "register":
-            register(request, response);
-            break;
+                register(request, response);
+                break;
             case "login":
-            login(request, response);
-            break;
+                login(request, response);
+                break;
+            case "booktid":
+                booktid(request, response);
+                break;
         }
     }
 
     private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String role = request.getParameter("role");
+        int roleID = Integer.parseInt(request.getParameter("role"));
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
-        String password = request.getParameter("password");
-        User user = new User(role, firstName, lastName, email, phone, password);
+        String pwd = request.getParameter("password");
+        Boolean created = UserManager.createUser(firstName, lastName, pwd, email, phone, roleID);
         String message;
-        if (UserManager.createUser(user)) {
+        if (created) {
+            User user = new User(Misc.getRoleName(roleID), firstName, lastName, email, phone, pwd);
             message = "Kære " + user.getFirstName() + ", tak for din registrering!";
+            request.getSession().setAttribute("user", user);
         } else {
             message = "Vi beklager, din registrering har desværre ikke kunnet behandles.";
         }
@@ -45,20 +51,34 @@ public class frontControl extends HttpServlet {
         //send to profile page
         request.getRequestDispatcher("minside.jsp").forward(request, response);
     }
-    
-    private void login (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        //String phone = request.getParameter("phone");
-        String password = request.getParameter("password");
-        //User user = new User(role, firstName, lastName, email, phone, password);
+
+    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String pwd = request.getParameter("pwd");
         String message;
-        /*if (UserManager.createUser(user)) {
-            message = "Kære " + user.getFirstName() + ", tak for din registrering!";
+        String page2view;
+        if (UserManager.validateUser(email, pwd)) {
+            User user = UserManager.getUser(email);
+            message = "Velkommen " + user.getFirstName() + "! Du er nu logget ind.";
+            request.getSession().setAttribute("user", user);
+            page2view = "minside.jsp";
         } else {
-            message = "Vi beklager, din registrering har desværre ikke kunnet behandles.";
+            message = "Ukendt bruger eller password.";
+            page2view = "login.jsp";
         }
         request.setAttribute("message", message);
-        //send to profile page
-        request.getRequestDispatcher("minside.jsp").forward(request, response);*/
+        request.getRequestDispatcher(page2view).forward(request, response);
+    }
+
+    private void booktid(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int TreatmentID = Integer.parseInt(request.getParameter("behandling"));
+        String treatment = TreatmentManager.getName(TreatmentID);
+        String date = request.getParameter("date-time");
+        //int userID = (User)request.getSession().getAttribute("user");
+        String message = "Du har booket en tid til " + treatment + " på følgende tidspunkt: " + date;
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("minside.jsp").forward(request, response);
+//Dateformat df = new SimpleDateFormat("yyyy-MM-dd");
+
     }
 }

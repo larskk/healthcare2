@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBUtil {
-
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     //private static final String DRIVER = "com.mysql.jdbc.Driver";    
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
@@ -16,9 +16,10 @@ public class DBUtil {
     public static Connection getConnection() {
         Connection conn = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(DRIVER);
             conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-        } catch (SQLException | ClassNotFoundException se) {
+        }
+        catch (SQLException | ClassNotFoundException se) {
             se.printStackTrace();
         }
         return conn;

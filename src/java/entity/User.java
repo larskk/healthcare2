@@ -1,6 +1,8 @@
 package entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private int ID;
     private String firstName;
     private String lastName;
@@ -8,6 +10,9 @@ public class User {
     private String phone;
     private String password;
     private String role;
+
+    public User() {
+    }
 
     public User(String role, String firstName, String lastName, String email, String phone, String password) {
         this.firstName = firstName;
