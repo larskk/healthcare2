@@ -8,38 +8,43 @@
   <body>
 
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <c:choose>
 
-    <c:if test = "${user == null}">
-      <p>Du skal først logge ind <a href="login.jsp">Gå til login siden</a></p>
-    </c:if>
+      <c:when test = "${user == null}">
+        <p>Du skal først logge ind <a href="login.jsp">Gå til login siden</a></p>
+      </c:when>
 
-    <c:if test="${user != null}">
-      <h2>Brugere</h2>
+      <c:when test= "${user.role.equals('Administrator')}">
+        <h2>Brugere</h2>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Fornavn</th>
-            <th>Efternavn</th>
-            <th>Email</th>
-            <th>Telefonnummer</th>
-            <th>Rolle</th>
-          </tr>
-        </thead>
-        
-        <tbody>
-          <c:forEach var="user" items="${users}">
+        <table>
+          <thead>
             <tr>
-              <td>${user.firstName}</td>
-              <td>${user.lastName}</td>
-              <td>${user.phone}</td>
-              <td>${user.email}</td>
-              <td>${user.role}</td>
+              <th>Fornavn</th>
+              <th>Efternavn</th>
+              <th>Email</th>
+              <th>Telefonnummer</th>
+              <th>Rolle</th>
             </tr>
-          </c:forEach>
-        </tbody>
-        
-      </table>
-    </c:if>
+          </thead>
+
+          <tbody>
+            <c:forEach var="user" items="${users}">
+              <tr>
+                <td>${user.firstName}</td>
+                <td>${user.lastName}</td>
+                <td>${user.phone}</td>
+                <td>${user.email}</td>
+                <td>${user.role}</td>
+              </tr>
+            </c:forEach>
+          </tbody>
+
+        </table>
+      </c:when>
+      <c:otherwise>
+        <p>Du har desværre ikke administrator-rettigheder!</p>
+      </c:otherwise>
+    </c:choose>
   </body>
 </html>

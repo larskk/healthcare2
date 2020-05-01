@@ -32,6 +32,7 @@ public class frontControl extends HttpServlet {
       case "booktid":
         booktid(request, response);
         break;
+      default: System.out.println("TEST");
     }
   }
 
@@ -81,11 +82,9 @@ public class frontControl extends HttpServlet {
     int TreatmentID = Integer.parseInt(request.getParameter("behandling"));
     String treatment = TreatmentManager.getName(TreatmentID);
     String date = request.getParameter("date-time");
-    //int userID = (User)request.getSession().getAttribute("user");
     String message = "Du har booket en tid til " + treatment + " på følgende tidspunkt: " + date;
     request.setAttribute("message", message);
     request.getRequestDispatcher("minside.jsp").forward(request, response);
-//Dateformat df = new SimpleDateFormat("yyyy-MM-dd");
 
   }
 }
