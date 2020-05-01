@@ -1,10 +1,4 @@
-<%-- 
-    Document   : index
-    Created on : 02-12-2018, 12:19:13
-    Author     : LarsKramer
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Sundhedsportalen</title>

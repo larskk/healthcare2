@@ -1,27 +1,18 @@
-<%-- 
-    Document   : minside
-    Created on : 02-12-2018, 12:18:21
-    Author     : LarsKramer
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        
-        <%@page import="entity.User" %>
-        <% String message = (String)request.getAttribute("message"); %>
-        <h2><%= message %></h2>
-        <% User user = (User)session.getAttribute("user"); %>
-         <p><% out.println(user.getEmail()); %></p>
-         <ul>
-            <li><a href="visbrugere.jsp">Vis brugere</a></li>
-            <li><a href="booktid.jsp">Book en tid</a></li>
-        </ul>
-         <h2>Mine tider</h2>
-    </body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+  </head>
+  <body>
+    <p>Velkommen ${user.firstName}, du er nu logget ind.</p>
+    <p>Rolle: ${user.role}</p>
+    <c:if test="${user.role == 'Administrator'}">
+      <p><a href="visbrugere.jsp">Vis brugere</a></p>
+    </c:if>
+    <p><a href="booktid.jsp">Book en tid</a></p>
+
+    <h2>Mine tider</h2>
+  </body>
 </html>
